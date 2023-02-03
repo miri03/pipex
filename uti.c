@@ -6,7 +6,7 @@
 /*   By: meharit <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 16:48:33 by meharit           #+#    #+#             */
-/*   Updated: 2023/02/02 21:27:55 by meharit          ###   ########.fr       */
+/*   Updated: 2023/02/03 16:53:56 by meharit          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,20 +42,21 @@ char	**get_path(char **envp)
 	return (path);
 }
 
-char	*does_exist(char *path_c, char **path)
+char	*does_exist(char *comm, t_var *var)
 {
 	int		i;
 	char	*test;
-	char	**command;
+	// char	**command;
 	i = 0;
 
-	command = ft_split(path_c, ' ');
-	if (access(command[0], F_OK) == 0)
-		return (command[0]);
-	command[0] = ft_strjoin("/", command[0]);
-	while (path[i])
+
+	var->com_p = ft_split(comm, ' ');
+	if (access(var->com_p[0], F_OK) == 0)
+		return (var->com_p[0]);
+	var->com_p[0] = ft_strjoin("/", var->com_p[0]);
+	while (var->path)
 	{
-		test = ft_strjoin(path[i], command[0]);
+		test = ft_strjoin(var->path[i], var->com_p[0]);
 		if (access(test, F_OK) == 0)
 			return (test);
 		i++;
@@ -63,11 +64,11 @@ char	*does_exist(char *path_c, char **path)
 	return (NULL);
 }
 
-void	check_commande(char *path_c, char **path)
+/* void	check_commande(char *path_c, char **path)
 {
 	char	*pat;
 	
 	pat = does_exist(path_c, path);
 	printf("%s\n", pat);
 
-}
+} */
