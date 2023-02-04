@@ -6,7 +6,7 @@
 /*   By: meharit <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 16:38:08 by meharit           #+#    #+#             */
-/*   Updated: 2023/02/03 16:51:34 by meharit          ###   ########.fr       */
+/*   Updated: 2023/02/04 23:40:57 by meharit          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,8 @@
 # include <stdlib.h>
 # include <fcntl.h>
 # include <unistd.h>
-
+#include <sys/wait.h>
+#include <stdbool.h>
 
 typedef struct s_var
 {

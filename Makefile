@@ -13,6 +13,8 @@ OFILE = pipex.o \
 		libft.o \
 		ft_split.o 
 
+all : $(NAME)
+
 $(NAME) : $(OFILE)
 	$(CC) $(CFLAGS) $(OFILE) -o $(NAME)
 
@@ -21,3 +23,5 @@ clean:
 
 fclean : clean
 	$(RM) $(NAME)
+
+re : fclean all
