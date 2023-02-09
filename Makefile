@@ -1,6 +1,7 @@
 CC = cc
 CFLAGS = -Wall -Wextra -Werror
 NAME = pipex
+BONUS = pipex_bonus
 RM = rm -rf
 
 CFILE = pipex.c \
@@ -17,6 +18,11 @@ all : $(NAME)
 
 $(NAME) : $(OFILE)
 	$(CC) $(CFLAGS) $(OFILE) -o $(NAME)
+
+bonus : $(BONUS)
+
+$(BONUS) : $(BFILE)
+	$(CC) $(CFLAGS) $(BFILE) -o $(BONUS)
 
 clean:
 	$(RM) $(OFILE)
