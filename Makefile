@@ -1,7 +1,9 @@
-CC = cc
 CFLAGS = -Wall -Wextra -Werror
+
 NAME = pipex
+
 BONUS = pipex_bonus
+
 RM = rm -rf
 
 CFILE = pipex.c \
@@ -14,6 +16,16 @@ OFILE = pipex.o \
 		libft.o \
 		ft_split.o 
 
+BFILE = pipex_bonus.c \
+		uti_bonus.c \
+		libft_bonus.c \
+		ft_split_bonus.c \
+
+OBONUS = pipex_bonus.o \
+		 uti_bonus.o \
+		 libft_bonus.o \
+		 ft_split_bonus.o \
+
 all : $(NAME)
 
 $(NAME) : $(OFILE)
@@ -21,13 +33,13 @@ $(NAME) : $(OFILE)
 
 bonus : $(BONUS)
 
-$(BONUS) : $(BFILE)
-	$(CC) $(CFLAGS) $(BFILE) -o $(BONUS)
+$(BONUS) : $(OBONUS)
+	cc $(CFLAGS) $(OBONUS) -o $(BONUS)
 
 clean:
-	$(RM) $(OFILE)
+	$(RM) $(OFILE) $(OBONUS)
 
 fclean : clean
-	$(RM) $(NAME)
+	$(RM) $(NAME) $(BONUS)
 
 re : fclean all

@@ -1,17 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pipex.h                                            :+:      :+:    :+:   */
+/*   bonus.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: meharit <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/02/02 16:38:08 by meharit           #+#    #+#             */
-/*   Updated: 2023/02/10 16:30:10 by meharit          ###   ########.fr       */
+/*   Created: 2023/02/10 23:32:24 by meharit           #+#    #+#             */
+/*   Updated: 2023/02/10 23:33:10 by meharit          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PIPEX_H
-# define PIPEX_H
+#ifndef BONUS_H
+# define BONUS_H
 
 # include <stdio.h>
 #include <stdlib.h>
@@ -30,16 +30,6 @@ typedef struct s_var
 	char	**com_p;
 	int		fd_r;
 }			t_var;
-
-typedef struct s_vr 
-{
-	int		pipe[2];
-	int		fd0;
-	int		fd1;
-	char	**path;
-	char	*command;
-	char	**com_p;
-}			t_vr;
 
 void	ft_putstr_fd(char *s, int fd);
 void	error_message(char *error);
