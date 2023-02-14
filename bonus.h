@@ -6,7 +6,7 @@
 /*   By: meharit <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/10 23:32:24 by meharit           #+#    #+#             */
-/*   Updated: 2023/02/10 23:33:10 by meharit          ###   ########.fr       */
+/*   Updated: 2023/02/13 12:48:09 by meharit          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,9 +22,9 @@
 
 typedef struct s_var
 {
-	int	pipe[2];
-	int	fd0;
-	int	fd1;
+	int		**pipe;
+	int		fd0;
+	int		fd1;
 	char	**path;
 	char	*command;
 	char	**com_p;

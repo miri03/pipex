@@ -6,7 +6,7 @@
 /*   By: meharit <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 16:48:33 by meharit           #+#    #+#             */
-/*   Updated: 2023/02/11 23:51:26 by meharit          ###   ########.fr       */
+/*   Updated: 2023/02/13 12:28:39 by meharit          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 void	error_message(char *error)
 {
 	ft_putstr_fd(error, 2);
+	printf("here\n");
 	exit (1);
 }
 
