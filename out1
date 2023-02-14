@@ -1,6 +1,0 @@
-NAME = pipex
-BONUS = pipex_bonus
-CFILE = pipex.c \
-OFILE = pipex.o \
-BFILE = pipex_bonus.c \
-OBONUS = pipex_bonus.o \
