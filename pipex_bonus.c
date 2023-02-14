@@ -25,7 +25,7 @@ void	child_proc(t_var *var, char **argv, char **envp, int cmd, int i)
 	var->command = does_exist(argv[cmd], var);
 	if (var->command == NULL)
 	{
-		ft_putstr_fd("command not found0\n", 1);
+		ft_putstr_fd("command not found\n", 1);
 		exit(127);
 	}
 	if (i == 0)
@@ -40,8 +40,8 @@ void	child_proc(t_var *var, char **argv, char **envp, int cmd, int i)
 	}
 	if (dup2(var->pipe[i][1], 1) == -1)
 		perror(":");
-	close(var->pipe[i][1]);
 	close(var->fd1);
+	
 	if (execve(var->command, var->com_p, envp) == -1)
 		perror("var->command");
 	// write output of cmd1 in pipe[1] 
@@ -55,17 +55,17 @@ void	child_proc2(t_var *var, char **argv, char **envp, int cmd, int i)
 	var->command = does_exist(argv[cmd], var);
 	if (var->command == NULL)
 	{
-		ft_putstr_fd("command not found1\n", 1);
+		ft_putstr_fd("command not found\n", 1);
 		exit(127);
 	}
 	if (dup2(var->fd1, 1) == -1)
 		perror("dup2 fd1");
-	close(var->fd1);
+	//close(var->fd1);
 	if (dup2(var->pipe[i - 1][0], 0) == -1)
-		perror("last");
+		perror("dup2 last pipe");
 	close(var->pipe[i - 1][0]);
 	if (execve(var->command, var->com_p, envp) == -1)
-		perror(var->command);;
+		perror(var->command);
 	exit(126);
 	// read output from pipe[0] 
 }
@@ -76,8 +76,8 @@ int	parent_proc(t_var *var, int *frk, int i)
 	int	w;
 
 	w = 0;
-	//close(var->fd0);
 	close(var->fd1);
+	close(var->fd0);
 	while (w < i - 1)
 	{
 		close(var->pipe[w][0]);
@@ -85,18 +85,14 @@ int	parent_proc(t_var *var, int *frk, int i)
 		w++;
 	}
 	w = 0;
-	//close(var->fd0);
 	while (w < i - 1)
 	{
 		waitpid(frk[w], NULL, 0);
 		w++;
 	}
 	waitpid(frk[w], &status, 0);
-	if (WIFEXITED(status) == true)
-	{
-		if (WEXITSTATUS(status))
-			return (WEXITSTATUS(status));
-	}
+	if (WIFEXITED(status))
+		return (WEXITSTATUS(status));
 	return (1);
 }
 

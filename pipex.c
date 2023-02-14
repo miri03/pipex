@@ -24,8 +24,10 @@ void	child_proc(t_var *var, char **argv, char **envp)
 	}
 	if (dup2(var->fd0, 0) == -1)
 		perror("dup2 fd0");
+	printf("ok\n");
 	if (dup2(var->pipe[1], 1) == -1)
 		perror(":");
+	
 	close(var->pipe[0]);
 	close(var->fd1);
 	if (execve(var->command, var->com_p, envp) == -1)
@@ -67,10 +69,7 @@ int	parent_proc(t_var *var, int *frk)
 	waitpid(frk[0], &status, 0);
 	waitpid(frk[1], &st, 0);
 	if (WIFEXITED(st) == true)
-	{
-		if (WEXITSTATUS(st))
-			return (WEXITSTATUS(st));
-	}
+		return (WEXITSTATUS(st));
 	return (1);
 }
 

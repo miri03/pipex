@@ -53,12 +53,15 @@ char	*does_exist(char *comm, t_var *var)
 	if (access(var->com_p[0], F_OK) == 0)
 		return (var->com_p[0]);
 	var->com_p[0] = ft_strjoin("/", var->com_p[0]);
-	while (var->path[i])
+	if (var->path)
 	{
-		test = ft_strjoin(var->path[i], var->com_p[0]);
-		if (access(test, F_OK) == 0)
-			return (test);
-		i++;
+		while (var->path[i])
+		{
+			test = ft_strjoin(var->path[i], var->com_p[0]);
+			if (access(test, F_OK) == 0)
+				return (test);
+			i++;
+		}
 	}
 	return (NULL);
 }
