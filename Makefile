@@ -18,10 +18,12 @@ OFILE = pipex.o \
 
 BFILE = pipex_bonus.c \
 		uti_bonus.c \
+		child_bonus.c \
 		libft_bonus.c \
 		ft_split_bonus.c \
 
 OBONUS = pipex_bonus.o \
+		 child_bonus.o \
 		 uti_bonus.o \
 		 libft_bonus.o \
 		 ft_split_bonus.o \
@@ -34,7 +36,7 @@ $(NAME) : $(OFILE)
 bonus : $(BONUS)
 
 $(BONUS) : $(OBONUS)
-	cc $(CFLAGS) $(OBONUS) -o $(BONUS)
+	cc -fsanitize=address -g $(CFLAGS) $(OBONUS) -o $(BONUS)
 
 clean:
 	$(RM) $(OFILE) $(OBONUS)

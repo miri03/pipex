@@ -6,7 +6,7 @@
 /*   By: meharit <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 16:37:32 by meharit           #+#    #+#             */
-/*   Updated: 2023/02/10 00:11:07 by meharit          ###   ########.fr       */
+/*   Updated: 2023/02/15 18:43:53 by meharit          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	child_proc(t_var *var, char **argv, char **envp)
 {
-	if (var->fd0 ==  -1)
+	if (var->fd0 == -1)
 		exit (0);
 	var->command = does_exist(argv[2], var);
 	if (var->command == NULL)
@@ -24,20 +24,17 @@ void	child_proc(t_var *var, char **argv, char **envp)
 	}
 	if (dup2(var->fd0, 0) == -1)
 		perror("dup2 fd0");
-	printf("ok\n");
 	if (dup2(var->pipe[1], 1) == -1)
 		perror(":");
-	
 	close(var->pipe[0]);
 	close(var->fd1);
 	if (execve(var->command, var->com_p, envp) == -1)
 		perror("var->command");
-	// write output of cmd1 in pipe[1] 
 }
 
 void	sec_child(t_var *var, char **argv, char **envp)
 {
-	if (var->fd1 ==  -1)
+	if (var->fd1 == -1)
 		exit (1);
 	var->command = does_exist(argv[3], var);
 	if (var->command == NULL)
@@ -54,7 +51,6 @@ void	sec_child(t_var *var, char **argv, char **envp)
 	if (execve(var->command, var->com_p, envp) == -1)
 		perror(var->command);
 	exit(126);
-	// read output from pipe[0] 
 }
 
 int	parent_proc(t_var *var, int *frk)
@@ -73,7 +69,7 @@ int	parent_proc(t_var *var, int *frk)
 	return (1);
 }
 
-int main(int argc, char **argv, char **envp)
+int	main(int argc, char **argv, char **envp)
 {
 	t_var	var;
 	int		frk[2];
@@ -99,5 +95,5 @@ int main(int argc, char **argv, char **envp)
 		sec_child(&var, argv, envp);
 	if (frk[1])
 		status = parent_proc(&var, frk);
-	return(status);
+	return (status);
 }

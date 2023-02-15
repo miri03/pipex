@@ -6,7 +6,7 @@
 /*   By: meharit <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/10 23:32:24 by meharit           #+#    #+#             */
-/*   Updated: 2023/02/13 12:48:09 by meharit          ###   ########.fr       */
+/*   Updated: 2023/02/15 19:23:27 by meharit          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,9 @@ typedef struct s_var
 	int		fd_r;
 }			t_var;
 
+void	uti_child1(t_var *var, int i);
+void	child_proc(t_var *var, char **envp, char *cmd, int i);
+void	child_proc2(t_var *var, char **envp, char *cmd, int i);
 void	ft_putstr_fd(char *s, int fd);
 void	error_message(char *error);
 int		ft_strncmp(const char *s1, const char *s2, size_t n);
