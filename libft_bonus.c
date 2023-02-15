@@ -6,7 +6,7 @@
 /*   By: meharit <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 16:50:08 by meharit           #+#    #+#             */
-/*   Updated: 2023/02/10 23:34:12 by meharit          ###   ########.fr       */
+/*   Updated: 2023/02/16 00:31:37 by meharit          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ int	ft_strncmp(const char *s1, const char *s2, size_t n)
 	return (0);
 }
 
-char	*ft_strjoin(char *s1, char *s2)
+char	*ft_strjoin(char *s1, char *s2, int f)
 {
 	char	*ptr;
 	int		i;
@@ -72,5 +72,7 @@ char	*ft_strjoin(char *s1, char *s2)
 		j++;
 	}
 	ptr[i] = '\0';
+	if (f == 0)
+		free(s2);
 	return (ptr);
 }

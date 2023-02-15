@@ -6,7 +6,7 @@
 /*   By: meharit <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/10 23:32:24 by meharit           #+#    #+#             */
-/*   Updated: 2023/02/15 19:23:27 by meharit          ###   ########.fr       */
+/*   Updated: 2023/02/16 00:32:21 by meharit          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ void	error_message(char *error);
 int		ft_strncmp(const char *s1, const char *s2, size_t n);
 char	**get_path(char **envp);
 char	**ft_split(char const *s, char c);
-char	*ft_strjoin(char *s1, char *s2);
+char	*ft_strjoin(char *s1, char *s2, int f);
 void	check_commande(char *path_c, char **path);
 char	*does_exist(char *comm, t_var *var);
 

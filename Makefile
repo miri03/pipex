@@ -36,7 +36,7 @@ $(NAME) : $(OFILE)
 bonus : $(BONUS)
 
 $(BONUS) : $(OBONUS)
-	cc -fsanitize=address -g $(CFLAGS) $(OBONUS) -o $(BONUS)
+	cc  $(CFLAGS) $(OBONUS) -o $(BONUS)
 
 clean:
 	$(RM) $(OFILE) $(OBONUS)

@@ -6,7 +6,7 @@
 /*   By: meharit <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 16:48:33 by meharit           #+#    #+#             */
-/*   Updated: 2023/02/15 19:25:56 by meharit          ###   ########.fr       */
+/*   Updated: 2023/02/16 00:32:52 by meharit          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,14 +52,15 @@ char	*does_exist(char *comm, t_var *var)
 	var->com_p = ft_split(comm, ' ');
 	if (access(var->com_p[0], F_OK) == 0)
 		return (var->com_p[0]);
-	var->com_p[0] = ft_strjoin("/", var->com_p[0]);
+	var->com_p[0] = ft_strjoin("/", var->com_p[0], 0);
 	if (var->path)
 	{
 		while (var->path[i])
 		{
-			test = ft_strjoin(var->path[i], var->com_p[0]);
+			test = ft_strjoin(var->path[i], var->com_p[0], 1);
 			if (access(test, F_OK) == 0)
 				return (test);
+			free(test);
 			i++;
 		}
 	}

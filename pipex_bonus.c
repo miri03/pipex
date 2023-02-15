@@ -6,7 +6,7 @@
 /*   By: meharit <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/09 22:16:57 by meharit           #+#    #+#             */
-/*   Updated: 2023/02/15 19:22:51 by meharit          ###   ########.fr       */
+/*   Updated: 2023/02/16 00:54:30 by meharit          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,12 +40,11 @@ int	parent_proc(t_var *var, int *frk, int i)
 
 void	make_pipes(t_var *var, int n_pipe)
 {
-	int	j;
+	static int	j;
 
-	j = 0;
 	while (j < n_pipe)
 	{
-		var->pipe[j] = malloc(sizeof(int) * 2);
+		var->pipe[j] = (int *)malloc(sizeof(int) * 2);
 		if (pipe(var->pipe[j]) == -1)
 			perror("pipe");
 		j++;
@@ -54,13 +53,12 @@ void	make_pipes(t_var *var, int n_pipe)
 
 int	uti_parent(t_var *var, int argc, char **envp, char **argv)
 {
-	int	status;
-	int	i;
-	int	cmd;
-	int	*frk;
+	int			status;
+	static int	i;
+	int			cmd;
+	int			*frk;
 
 	cmd = 2;
-	i = 0;
 	frk = malloc(sizeof(int) * (argc - 3));
 	while (i < argc - 3)
 	{
@@ -77,6 +75,7 @@ int	uti_parent(t_var *var, int argc, char **envp, char **argv)
 		cmd++;
 		i++;
 	}
+	system("leaks pipex_bonus");
 	status = parent_proc(var, frk, i);
 	return (status);
 }
@@ -97,6 +96,7 @@ int	main(int argc, char **argv, char **envp)
 	if (var.fd1 == -1)
 		perror(argv[argc - 1]);
 	var.path = get_path(envp);
+	uti_parent(&var, argc, envp, argv);
 	status = uti_parent(&var, argc, envp, argv);
 	return (status);
 }
