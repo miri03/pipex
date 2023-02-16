@@ -6,7 +6,7 @@
 /*   By: meharit <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/09 22:16:57 by meharit           #+#    #+#             */
-/*   Updated: 2023/02/16 00:54:30 by meharit          ###   ########.fr       */
+/*   Updated: 2023/02/16 17:55:40 by meharit          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,7 @@ void	make_pipes(t_var *var, int n_pipe)
 		var->pipe[j] = (int *)malloc(sizeof(int) * 2);
 		if (pipe(var->pipe[j]) == -1)
 			perror("pipe");
+		printf("in %d out %d\n", var->pipe[j][0], var->pipe[j][1]);
 		j++;
 	}
 }
@@ -75,7 +76,6 @@ int	uti_parent(t_var *var, int argc, char **envp, char **argv)
 		cmd++;
 		i++;
 	}
-	system("leaks pipex_bonus");
 	status = parent_proc(var, frk, i);
 	return (status);
 }
@@ -87,6 +87,8 @@ int	main(int argc, char **argv, char **envp)
 
 	if (argc < 5)
 		error_message("Not enought/too much arguments\n");
+	if (ft_strcmp(argv[1], "here_doc") == 0)
+		here_doc(argc, argv, envp);
 	status = 0;
 	var.pipe = (int **)malloc(sizeof(int *) * (argc - 4));
 	var.fd0 = open(argv[1], O_RDONLY);

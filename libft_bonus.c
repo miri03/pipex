@@ -6,13 +6,13 @@
 /*   By: meharit <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 16:50:08 by meharit           #+#    #+#             */
-/*   Updated: 2023/02/16 00:31:37 by meharit          ###   ########.fr       */
+/*   Updated: 2023/02/16 13:22:47 by meharit          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "bonus.h"
 
-int		ft_strlen(char *str)
+int	ft_strlen(const char *str)
 {
 	int	i;
 
@@ -75,4 +75,18 @@ char	*ft_strjoin(char *s1, char *s2, int f)
 	if (f == 0)
 		free(s2);
 	return (ptr);
+}
+
+int	ft_strcmp(char *s1, char *s2)
+{
+	int	count;
+
+	count = 0;
+	while (s1[count] != '\0' || s2[count] != '\0')
+	{
+		if (s1[count] != s2[count])
+			return (s1[count] - s2[count]);
+		count++;
+	}
+	return (0);
 }

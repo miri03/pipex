@@ -21,12 +21,18 @@ BFILE = pipex_bonus.c \
 		child_bonus.c \
 		libft_bonus.c \
 		ft_split_bonus.c \
+		here_doc_bonus.c \
+		get_next_line.c \
+		get_next_line_utils.c \
 
 OBONUS = pipex_bonus.o \
 		 child_bonus.o \
 		 uti_bonus.o \
 		 libft_bonus.o \
 		 ft_split_bonus.o \
+		 here_doc_bonus.o \
+		 get_next_line.o \
+		 get_next_line_utils.o \
 
 all : $(NAME)
 
