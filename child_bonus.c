@@ -6,7 +6,7 @@
 /*   By: meharit <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/15 19:21:39 by meharit           #+#    #+#             */
-/*   Updated: 2023/02/16 00:58:44 by meharit          ###   ########.fr       */
+/*   Updated: 2023/02/17 14:19:47 by meharit          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,10 +44,8 @@ void	child_proc(t_var *var, char **envp, char *cmd, int i)
 		if (dup2(var->pipe[i - 1][0], 0) == -1)
 			perror("dup2 pipe");
 	}
-	printf("%d %d\n", var->pipe[i][0], var->pipe[i][1]);
-	// if (dup2(var->pipe[i][1], 1) == -1)
-	// 	perror(":");
-	
+	if (dup2(var->pipe[i][1], 1) == -1)
+		perror(":");
 	close(var->fd1);
 	if (execve(var->command, var->com_p, envp) == -1)
 		perror("var->command");
@@ -70,7 +68,6 @@ void	child_proc2(t_var *var, char **envp, char *cmd, int i)
 	if (dup2(var->pipe[i - 1][0], 0) == -1)
 		perror("dup2 last pipe");
 	close(var->pipe[i - 1][0]);
-	printf("ok1\n");
 	if (execve(var->command, var->com_p, envp) == -1)
 		perror(var->command);
 	exit(126);
