@@ -6,7 +6,7 @@
 /*   By: meharit <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/09 22:16:57 by meharit           #+#    #+#             */
-/*   Updated: 2023/02/16 17:55:40 by meharit          ###   ########.fr       */
+/*   Updated: 2023/02/18 16:46:57 by meharit          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,6 @@ void	make_pipes(t_var *var, int n_pipe)
 		var->pipe[j] = (int *)malloc(sizeof(int) * 2);
 		if (pipe(var->pipe[j]) == -1)
 			perror("pipe");
-		//printf("in %d out %d\n", var->pipe[j][0], var->pipe[j][1]);
 		j++;
 	}
 }
@@ -70,16 +69,13 @@ int	uti_parent(t_var *var, int argc, char **envp, char **argv)
 		if (i < argc - 4)
 			close(var->pipe[i][1]);
 		if (i)
-		{
-			printf("i = %d\n", i);
 			close(var->fd0);
-		}
-			
 		if (i == argc - 4 && frk[i] == 0)
 			child_proc2(var, envp, argv[cmd], i);
 		cmd++;
 		i++;
 	}
+	free(frk);
 	status = parent_proc(var, frk, i);
 	return (status);
 }
@@ -102,7 +98,6 @@ int	main(int argc, char **argv, char **envp)
 	if (var.fd1 == -1)
 		perror(argv[argc - 1]);
 	var.path = get_path(envp);
-	uti_parent(&var, argc, envp, argv);
 	status = uti_parent(&var, argc, envp, argv);
 	return (status);
 }

@@ -12,6 +12,16 @@
 
 #include "bonus.h"
 
+int	ft_strlen(const char *str)
+{
+	int	i;
+
+	i = 0;
+	while (str[i])
+		i++;
+	return (i);
+}
+
 void	error_message(char *error)
 {
 	ft_putstr_fd(error, 2);
@@ -63,5 +73,6 @@ char	*does_exist(char *comm, t_var *var)
 			i++;
 		}
 	}
+	free(var->com_p[0]);
 	return (NULL);
 }

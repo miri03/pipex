@@ -63,6 +63,6 @@ char	*does_exist(char *comm, t_var *var)
 			i++;
 		}
 	}
-	free(var->com_p[0]); //?
+	free(var->com_p[0]);
 	return (NULL);
 }

@@ -12,16 +12,6 @@
 
 #include "bonus.h"
 
-int	ft_strlen(const char *str)
-{
-	int	i;
-
-	i = 0;
-	while (str[i])
-		i++;
-	return (i);
-}
-
 void	ft_putstr_fd(char *s, int fd)
 {
 	if (s != NULL && fd >= 0)
@@ -46,6 +36,18 @@ int	ft_strncmp(const char *s1, const char *s2, size_t n)
 	return (0);
 }
 
+char	*put_in_ptr(char *s2, char *ptr, int i, int j)
+{
+	while (s2[j] != '\0')
+	{
+		ptr[i] = s2[j];
+		i++;
+		j++;
+	}
+	ptr[i] = '\0';
+	return (ptr);
+}
+
 char	*ft_strjoin(char *s1, char *s2, int f)
 {
 	char	*ptr;
@@ -65,13 +67,7 @@ char	*ft_strjoin(char *s1, char *s2, int f)
 		ptr[i] = s1[i];
 		i++;
 	}
-	while (s2[j] != '\0')
-	{
-		ptr[i] = s2[j];
-		i++;
-		j++;
-	}
-	ptr[i] = '\0';
+	put_in_ptr(s2, ptr, i, j);
 	if (f == 0)
 		free(s2);
 	return (ptr);

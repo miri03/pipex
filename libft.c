@@ -46,6 +46,13 @@ int	ft_strncmp(const char *s1, const char *s2, size_t n)
 	return (0);
 }
 
+void	strjoin_con(char *ptr, int i, char *s2, int f)
+{
+	ptr[i] = '\0';
+	if (f == 1)
+		free(s2);
+}
+
 char	*ft_strjoin(char *s1, char *s2, int f)
 {
 	char	*ptr;
@@ -71,8 +78,6 @@ char	*ft_strjoin(char *s1, char *s2, int f)
 		i++;
 		j++;
 	}
-	ptr[i] = '\0';
-	if (f == 1)
-		free(s2);
+	strjoin_con(ptr, i, s2, f);
 	return (ptr);
 }
