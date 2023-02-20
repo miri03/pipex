@@ -51,6 +51,16 @@ void	make_pipes(t_var *var, int n_pipe)
 	}
 }
 
+void	p_close(t_var *var, int i, int nb)
+{
+	if (i)
+	{
+		if (i < nb)
+			close(var->pipe[i - 1][0]);
+		close(var->fd0);
+	}
+}
+
 int	uti_parent(t_var *var, int argc, char **envp, char **argv)
 {
 	int			status;
@@ -68,8 +78,7 @@ int	uti_parent(t_var *var, int argc, char **envp, char **argv)
 			child_proc(var, envp, argv[cmd], i);
 		if (i < argc - 4)
 			close(var->pipe[i][1]);
-		if (i)
-			close(var->fd0);
+		p_close(var, i, argc - 4);
 		if (i == argc - 4 && frk[i] == 0)
 			child_proc2(var, envp, argv[cmd], i);
 		cmd++;
@@ -85,10 +94,10 @@ int	main(int argc, char **argv, char **envp)
 	t_var	var;
 	int		status;
 
+	if (argc >= 6 && ft_strcmp(argv[1], "here_doc") == 0)
+		here_doc(argc, argv, envp);
 	if (argc < 5)
 		error_message("Not enought/too much arguments\n");
-	if (ft_strcmp(argv[1], "here_doc") == 0)
-		here_doc(argc, argv, envp);
 	status = 0;
 	var.pipe = (int **)malloc(sizeof(int *) * (argc - 4));
 	var.fd0 = open(argv[1], O_RDONLY);
